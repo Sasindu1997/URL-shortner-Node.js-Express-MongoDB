@@ -1,12 +1,12 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const ShortUrl = require('./models/shortUrl')
-const shortUrl = require('./models/shortUrl')
 const app = express()
 
-mongoose.connect('mongodb://localhost/urlShoertner',{
+mongoose.connect('mongodb://localhost/urlShortner',{
     useNewUrlParser : true, useUnifiedTopology : true
 })
+
 mongoose.connection.on('error', (err)=>{
     console.log('>> Failed to connect to MongoDB, retrying...');
 })
@@ -18,9 +18,9 @@ app.get('/', (req,res) => {
     res.render('index')
 })
 
-app.post('/shortUrls', async(req, res) => {
-    await shortUrl.create({ full : req.body.fullUrl })
-    res.redirect('index')
+app.post('/shortUrls', async (req, res) => {
+    await ShortUrl.create({ full : req.body.fullUrl })
+    res.redirect('/')
 })
 
 app.listen(process.env.PORT || 5000);
