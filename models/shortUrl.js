@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const shortId = require('shortid')
 
+//creating db model class as schema
 const shortUrlSchema = new mongoose.Schema({
     full : {
         type : String,
